@@ -1,0 +1,537 @@
+
+[root@localhost ~]# docker run -it --name myapache centos:7
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+[root@6af588313d39 /]# ifconfig
+bash: ifconfig: command not found
+[root@6af588313d39 /]# yum install net-tools
+Loaded plugins: fastestmirror, ovl
+Determining fastest mirrors
+ * base: mirrors.piconets.webwerks.in
+ * extras: mirrors.piconets.webwerks.in
+ * updates: mirrors.piconets.webwerks.in
+base                                                                                                                                                              | 3.6 kB  00:00:00     
+extras                                                                                                                                                            | 2.9 kB  00:00:00     
+updates                                                                                                                                                           | 2.9 kB  00:00:00     
+(1/4): extras/7/x86_64/primary_db                                                                                                                                 | 165 kB  00:00:01     
+(2/4): base/7/x86_64/group_gz                                                                                                                                     | 165 kB  00:00:01     
+(3/4): base/7/x86_64/primary_db                                                                                                                                   | 6.0 MB  00:00:13     
+(4/4): updates/7/x86_64/primary_db                                                                                                                                | 7.6 MB  00:00:13     
+Resolving Dependencies
+--> Running transaction check
+---> Package net-tools.x86_64 0:2.0-0.25.20131004git.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=========================================================================================================================================================================================
+ Package                                   Arch                                   Version                                                     Repository                            Size
+=========================================================================================================================================================================================
+Installing:
+ net-tools                                 x86_64                                 2.0-0.25.20131004git.el7                                    base                                 306 k
+
+Transaction Summary
+=========================================================================================================================================================================================
+Install  1 Package
+
+Total download size: 306 k
+Installed size: 917 k
+Is this ok [y/d/N]: y
+Downloading packages:
+warning: /var/cache/yum/x86_64/7/base/packages/net-tools-2.0-0.25.20131004git.el7.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID f4a80eb5: NOKEY   ] 296 kB/s | 278 kB  00:00:00 ETA 
+Public key for net-tools-2.0-0.25.20131004git.el7.x86_64.rpm is not installed
+net-tools-2.0-0.25.20131004git.el7.x86_64.rpm                                                                                                                     | 306 kB  00:00:01     
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+Importing GPG key 0xF4A80EB5:
+ Userid     : "CentOS-7 Key (CentOS 7 Official Signing Key) <security@centos.org>"
+ Fingerprint: 6341 ab27 53d7 8a78 a7c2 7bb1 24c6 a8a7 f4a8 0eb5
+ Package    : centos-release-7-7.1908.0.el7.centos.x86_64 (@CentOS)
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+Is this ok [y/N]: y
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : net-tools-2.0-0.25.20131004git.el7.x86_64                                                                                                                             1/1 
+  Verifying  : net-tools-2.0-0.25.20131004git.el7.x86_64                                                                                                                             1/1 
+
+Installed:
+  net-tools.x86_64 0:2.0-0.25.20131004git.el7                                                                                                                                            
+
+Complete!
+[root@6af588313d39 /]# ifconfig
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.88.0.32  netmask 255.255.0.0  broadcast 10.88.255.255
+        inet6 fe80::3c61:b0ff:fe69:4dad  prefixlen 64  scopeid 0x20<link>
+        ether 3e:61:b0:69:4d:ad  txqueuelen 0  (Ethernet)
+        RX packets 6162  bytes 15255074 (14.5 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 4211  bytes 231101 (225.6 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+[root@6af588313d39 /]# netstat -tnlp
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+[root@6af588313d39 /]# yum install httpd
+Loaded plugins: fastestmirror, ovl
+Loading mirror speeds from cached hostfile
+ * base: mirrors.piconets.webwerks.in
+ * extras: mirrors.piconets.webwerks.in
+ * updates: mirrors.piconets.webwerks.in
+Resolving Dependencies
+--> Running transaction check
+---> Package httpd.x86_64 0:2.4.6-90.el7.centos will be installed
+--> Processing Dependency: httpd-tools = 2.4.6-90.el7.centos for package: httpd-2.4.6-90.el7.centos.x86_64
+--> Processing Dependency: system-logos >= 7.92.1-1 for package: httpd-2.4.6-90.el7.centos.x86_64
+--> Processing Dependency: /etc/mime.types for package: httpd-2.4.6-90.el7.centos.x86_64
+--> Processing Dependency: libaprutil-1.so.0()(64bit) for package: httpd-2.4.6-90.el7.centos.x86_64
+--> Processing Dependency: libapr-1.so.0()(64bit) for package: httpd-2.4.6-90.el7.centos.x86_64
+--> Running transaction check
+---> Package apr.x86_64 0:1.4.8-5.el7 will be installed
+---> Package apr-util.x86_64 0:1.5.2-6.el7 will be installed
+---> Package centos-logos.noarch 0:70.0.6-3.el7.centos will be installed
+---> Package httpd-tools.x86_64 0:2.4.6-90.el7.centos will be installed
+---> Package mailcap.noarch 0:2.1.41-2.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=======================================================================================================================================================
+ Package                              Arch                           Version                                        Repository                    Size
+=======================================================================================================================================================
+Installing:
+ httpd                                x86_64                         2.4.6-90.el7.centos                            base                         2.7 M
+Installing for dependencies:
+ apr                                  x86_64                         1.4.8-5.el7                                    base                         103 k
+ apr-util                             x86_64                         1.5.2-6.el7                                    base                          92 k
+ centos-logos                         noarch                         70.0.6-3.el7.centos                            base                          21 M
+ httpd-tools                          x86_64                         2.4.6-90.el7.centos                            base                          91 k
+ mailcap                              noarch                         2.1.41-2.el7                                   base                          31 k
+
+Transaction Summary
+=======================================================================================================================================================
+Install  1 Package (+5 Dependent packages)
+
+Total download size: 24 M
+Installed size: 31 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/6): apr-1.4.8-5.el7.x86_64.rpm                                                                                               | 103 kB  00:00:00     
+(2/6): apr-util-1.5.2-6.el7.x86_64.rpm                                                                                          |  92 kB  00:00:00     
+(3/6): mailcap-2.1.41-2.el7.noarch.rpm                                                                                          |  31 kB  00:00:00     
+(4/6): httpd-tools-2.4.6-90.el7.centos.x86_64.rpm                                                                               |  91 kB  00:00:02     
+(5/6): httpd-2.4.6-90.el7.centos.x86_64.rpm                                                                                     | 2.7 MB  00:00:12     
+(6/6): centos-logos-70.0.6-3.el7.centos.noarch.rpm                                                                              |  21 MB  00:01:05     
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                  382 kB/s |  24 MB  00:01:05     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : apr-1.4.8-5.el7.x86_64                                                                                                              1/6 
+  Installing : apr-util-1.5.2-6.el7.x86_64                                                                                                         2/6 
+  Installing : httpd-tools-2.4.6-90.el7.centos.x86_64                                                                                              3/6 
+  Installing : centos-logos-70.0.6-3.el7.centos.noarch                                                                                             4/6 
+  Installing : mailcap-2.1.41-2.el7.noarch                                                                                                         5/6 
+  Installing : httpd-2.4.6-90.el7.centos.x86_64                                                                                                    6/6 
+  Verifying  : mailcap-2.1.41-2.el7.noarch                                                                                                         1/6 
+  Verifying  : httpd-tools-2.4.6-90.el7.centos.x86_64                                                                                              2/6 
+  Verifying  : apr-util-1.5.2-6.el7.x86_64                                                                                                         3/6 
+  Verifying  : httpd-2.4.6-90.el7.centos.x86_64                                                                                                    4/6 
+  Verifying  : apr-1.4.8-5.el7.x86_64                                                                                                              5/6 
+  Verifying  : centos-logos-70.0.6-3.el7.centos.noarch                                                                                             6/6 
+
+Installed:
+  httpd.x86_64 0:2.4.6-90.el7.centos                                                                                                                   
+
+Dependency Installed:
+  apr.x86_64 0:1.4.8-5.el7       apr-util.x86_64 0:1.5.2-6.el7  centos-logos.noarch 0:70.0.6-3.el7.centos  httpd-tools.x86_64 0:2.4.6-90.el7.centos 
+  mailcap.noarch 0:2.1.41-2.el7 
+
+Complete!
+[root@6af588313d39 /]# netstat -tnlp
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+[root@6af588313d39 /]# cd var/sbin/httpd
+bash: cd: var/sbin/httpd: No such file or directory
+[root@6af588313d39 /]# cd var/sbin/     
+bash: cd: var/sbin/: No such file or directory
+[root@6af588313d39 /]# cd var/www/
+[root@6af588313d39 www]# cd html
+[root@6af588313d39 html]# ls
+[root@6af588313d39 html]# vi index.php
+[root@6af588313d39 html]# var/sbin/httpd
+bash: var/sbin/httpd: No such file or directory
+[root@6af588313d39 html]# cd
+[root@6af588313d39 ~]# var/sbin/httpd
+bash: var/sbin/httpd: No such file or directory
+[root@6af588313d39 ~]# var/sbin/httpd
+bash: var/sbin/httpd: No such file or directory
+[root@6af588313d39 ~]# yum install httpd
+Loaded plugins: fastestmirror, ovl
+Loading mirror speeds from cached hostfile
+ * base: mirrors.piconets.webwerks.in
+ * extras: mirrors.piconets.webwerks.in
+ * updates: mirrors.piconets.webwerks.in
+Package httpd-2.4.6-90.el7.centos.x86_64 already installed and latest version
+Nothing to do
+[root@6af588313d39 ~]# yum install httpd -y
+Loaded plugins: fastestmirror, ovl
+Loading mirror speeds from cached hostfile
+ * base: mirrors.piconets.webwerks.in
+ * extras: mirrors.piconets.webwerks.in
+ * updates: mirrors.piconets.webwerks.in
+Package httpd-2.4.6-90.el7.centos.x86_64 already installed and latest version
+Nothing to do
+[root@6af588313d39 ~]# var     
+bash: var: command not found
+[root@6af588313d39 ~]# var/sbin/httpd
+bash: var/sbin/httpd: No such file or directory
+[root@6af588313d39 ~]# yum install php
+Loaded plugins: fastestmirror, ovl
+Loading mirror speeds from cached hostfile
+ * base: mirrors.piconets.webwerks.in
+ * extras: mirrors.piconets.webwerks.in
+ * updates: mirrors.piconets.webwerks.in
+Resolving Dependencies
+--> Running transaction check
+---> Package php.x86_64 0:5.4.16-46.1.el7_7 will be installed
+--> Processing Dependency: php-common(x86-64) = 5.4.16-46.1.el7_7 for package: php-5.4.16-46.1.el7_7.x86_64
+--> Processing Dependency: php-cli(x86-64) = 5.4.16-46.1.el7_7 for package: php-5.4.16-46.1.el7_7.x86_64
+--> Running transaction check
+---> Package php-cli.x86_64 0:5.4.16-46.1.el7_7 will be installed
+--> Processing Dependency: libedit.so.0()(64bit) for package: php-cli-5.4.16-46.1.el7_7.x86_64
+---> Package php-common.x86_64 0:5.4.16-46.1.el7_7 will be installed
+--> Processing Dependency: libzip.so.2()(64bit) for package: php-common-5.4.16-46.1.el7_7.x86_64
+--> Running transaction check
+---> Package libedit.x86_64 0:3.0-12.20121213cvs.el7 will be installed
+---> Package libzip.x86_64 0:0.10.1-8.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=======================================================================================================================================================
+ Package                           Arch                          Version                                          Repository                      Size
+=======================================================================================================================================================
+Installing:
+ php                               x86_64                        5.4.16-46.1.el7_7                                updates                        1.4 M
+Installing for dependencies:
+ libedit                           x86_64                        3.0-12.20121213cvs.el7                           base                            92 k
+ libzip                            x86_64                        0.10.1-8.el7                                     base                            48 k
+ php-cli                           x86_64                        5.4.16-46.1.el7_7                                updates                        2.7 M
+ php-common                        x86_64                        5.4.16-46.1.el7_7                                updates                        565 k
+
+Transaction Summary
+=======================================================================================================================================================
+Install  1 Package (+4 Dependent packages)
+
+Total download size: 4.8 M
+Installed size: 17 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/5): libedit-3.0-12.20121213cvs.el7.x86_64.rpm                                                                                |  92 kB  00:00:00     
+(2/5): libzip-0.10.1-8.el7.x86_64.rpm                                                                                           |  48 kB  00:00:00     
+(3/5): php-5.4.16-46.1.el7_7.x86_64.rpm                                                                                         | 1.4 MB  00:00:03     
+(4/5): php-common-5.4.16-46.1.el7_7.x86_64.rpm                                                                                  | 565 kB  00:00:04     
+(5/5): php-cli-5.4.16-46.1.el7_7.x86_64.rpm                                                                                     | 2.7 MB  00:00:05     
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                  796 kB/s | 4.8 MB  00:00:06     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : libedit-3.0-12.20121213cvs.el7.x86_64                                                                                               1/5 
+  Installing : libzip-0.10.1-8.el7.x86_64                                                                                                          2/5 
+  Installing : php-common-5.4.16-46.1.el7_7.x86_64                                                                                                 3/5 
+  Installing : php-cli-5.4.16-46.1.el7_7.x86_64                                                                                                    4/5 
+  Installing : php-5.4.16-46.1.el7_7.x86_64                                                                                                        5/5 
+  Verifying  : php-common-5.4.16-46.1.el7_7.x86_64                                                                                                 1/5 
+  Verifying  : libzip-0.10.1-8.el7.x86_64                                                                                                          2/5 
+  Verifying  : php-cli-5.4.16-46.1.el7_7.x86_64                                                                                                    3/5 
+  Verifying  : libedit-3.0-12.20121213cvs.el7.x86_64                                                                                               4/5 
+  Verifying  : php-5.4.16-46.1.el7_7.x86_64                                                                                                        5/5 
+
+Installed:
+  php.x86_64 0:5.4.16-46.1.el7_7                                                                                                                       
+
+Dependency Installed:
+  libedit.x86_64 0:3.0-12.20121213cvs.el7   libzip.x86_64 0:0.10.1-8.el7   php-cli.x86_64 0:5.4.16-46.1.el7_7   php-common.x86_64 0:5.4.16-46.1.el7_7  
+
+Complete!
+[root@6af588313d39 ~]# var/sbin/httpd
+bash: var/sbin/httpd: No such file or directory
+[root@6af588313d39 ~]#  ifconfig
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.88.0.32  netmask 255.255.0.0  broadcast 10.88.255.255
+        inet6 fe80::3c61:b0ff:fe69:4dad  prefixlen 64  scopeid 0x20<link>
+        ether 3e:61:b0:69:4d:ad  txqueuelen 0  (Ethernet)
+        RX packets 18809  bytes 46489250 (44.3 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 12473  bytes 679922 (663.9 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+[root@6af588313d39 ~]# curl 10.88.0.32
+curl: (7) Failed connect to 10.88.0.32:80; Connection refused
+[root@6af588313d39 ~]# /usr/sbin/httpd
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 10.88.0.32. Set the 'ServerName' directive globally to suppress this message
+[root@6af588313d39 ~]# curl 10.88.0.32
+[root@6af588313d39 ~]# netstate -tnlp
+bash: netstate: command not found
+[root@6af588313d39 ~]# netstat -tnlp
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp6       0      0 :::80                   :::*                    LISTEN      114/httpd           
+[root@6af588313d39 ~]# curl 10.88.0.32
+[root@6af588313d39 ~]# cd var/www/html
+bash: cd: var/www/html: No such file or directory
+[root@6af588313d39 ~]# cd var/www/html/
+bash: cd: var/www/html/: No such file or directory
+[root@6af588313d39 ~]# cd  /var/www/html/
+[root@6af588313d39 html]# ls
+index.php
+[root@6af588313d39 html]# cat index.php
+<pre>
+
+
+
+<?php
+
+print("Welcome To Php World In Docker\n");
+print `date`;
+print("\n")
+print `ifconfig`;
+
+
+
+
+
+?>
+</pre>
+[root@6af588313d39 html]# vi index.php
+[root@6af588313d39 html]# curl 10.88.0.32
+[root@6af588313d39 html]# curl 10.88.0.32
+[root@6af588313d39 html]# vi index.php
+[root@6af588313d39 html]# curl 10.88.0.32
+[root@6af588313d39 html]# vi index.php
+[root@6af588313d39 html]# curl 10.88.0.32
+[root@6af588313d39 html]# ls             
+index.php
+[root@6af588313d39 html]# curl 10.88.0.32
+[root@6af588313d39 html]# yum install php
+Loaded plugins: fastestmirror, ovl
+Loading mirror speeds from cached hostfile
+ * base: mirrors.piconets.webwerks.in
+ * extras: mirrors.piconets.webwerks.in
+ * updates: mirrors.piconets.webwerks.in
+Package php-5.4.16-46.1.el7_7.x86_64 already installed and latest version
+Nothing to do
+[root@6af588313d39 html]# curl 10.88.0.32
+[root@6af588313d39 html]# cat index.php
+
+
+<?php
+
+print("Welcome To Php World In Docker");
+print("\n")
+
+print `date`;
+print("\n")
+print `ifconfig`;
+
+?>
+
+[root@6af588313d39 html]# curl 10.88.0.32
+[root@6af588313d39 html]# ls             
+index.php
+[root@6af588313d39 html]# vi index.php
+[root@6af588313d39 html]# curl 10.88.0.32
+<html>
+
+<h1> hello i am from docker</h1>
+</html>
+
+[root@6af588313d39 html]# vi index.php
+[root@6af588313d39 html]# curl 10.88.0.32
+[root@6af588313d39 html]# curl 10.88.0.32
+[root@6af588313d39 html]# vi index.php
+[root@6af588313d39 html]# curl 10.88.0.32
+[root@6af588313d39 html]# rm index.php
+rm: remove regular file 'index.php'? 
+[root@6af588313d39 html]# ls
+index.php
+[root@6af588313d39 html]# rm -f index.php
+[root@6af588313d39 html]# ls
+[root@6af588313d39 html]# vi index.html
+[root@6af588313d39 html]# curl 10.88.0.32
+<html>
+
+<h1> Hello Tushar<\h1>
+<h2>This Is From Docker Apache server<\h1>
+<\html>
+[root@6af588313d39 html]# curl 10.88.0.32
+<html>
+
+<h1> Hello Tushar<\h1>
+<h2>This Is From Docker Apache server<\h1>
+<\html>
+[root@6af588313d39 html]# netstat -tnlp  
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp6       0      0 :::80                   :::*                    LISTEN      114/httpd           
+[root@6af588313d39 html]# curl 10.88.0.32
+<html>
+
+<h1> Hello Tushar<\h1>
+<h2>This Is From Docker Apache server<\h1>
+<\html>
+[root@6af588313d39 html]# vi index.html
+[root@6af588313d39 html]# curl 10.88.0.32
+<html>
+
+<h1> Hello Tushar</h1>
+<h2>This Is From Docker Apache server</h1>
+</html>
+[root@6af588313d39 html]# curl 10.88.0.32
+<html>
+
+<h1> Hello Tushar</h1>
+<h2>This Is From Docker Apache server</h1>
+</html>
+[root@6af588313d39 html]# ifconfig       
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.88.0.32  netmask 255.255.0.0  broadcast 10.88.255.255
+        inet6 fe80::3c61:b0ff:fe69:4dad  prefixlen 64  scopeid 0x20<link>
+        ether 3e:61:b0:69:4d:ad  txqueuelen 0  (Ethernet)
+        RX packets 18832  bytes 46491700 (44.3 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 12490  bytes 681902 (665.9 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 182  bytes 15636 (15.2 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 182  bytes 15636 (15.2 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+[root@6af588313d39 html]# curl 10.88.0.32
+<html>
+
+<h1> Hello Tushar</h1>
+<h2>This Is From Docker Apache server</h1>
+</html>
+[root@6af588313d39 html]# rm index.html
+rm: remove regular file 'index.html'? y       
+[root@6af588313d39 html]# rm -f index.html
+[root@6af588313d39 html]# ls
+[root@6af588313d39 html]# vi index.php
+[root@6af588313d39 html]# curl 10.88.0.32
+Hello tushar[root@6af588313d39 html]# vi index.php
+[root@6af588313d39 html]# curl 10.88.0.32
+Hello Tushar
+This Is The Server Of Apache Docker-Centos7
+Sun Apr 26 18:44:36 UTC 2020
+
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.88.0.32  netmask 255.255.0.0  broadcast 10.88.255.255
+        inet6 fe80::3c61:b0ff:fe69:4dad  prefixlen 64  scopeid 0x20<link>
+        ether 3e:61:b0:69:4d:ad  txqueuelen 0  (Ethernet)
+        RX packets 18832  bytes 46491700 (44.3 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 12490  bytes 681902 (665.9 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 207  bytes 17736 (17.3 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 207  bytes 17736 (17.3 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+[root@6af588313d39 html]# vi index.php
+[root@6af588313d39 html]# vi index.php
+[root@6af588313d39 html]# curl 10.88.0.32
+<pre>
+<body color="RED">
+Hello Tushar
+This Is The Server Of Apache Docker-Centos7
+Sun Apr 26 18:46:55 UTC 2020
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.88.0.32  netmask 255.255.0.0  broadcast 10.88.255.255
+        inet6 fe80::3c61:b0ff:fe69:4dad  prefixlen 64  scopeid 0x20<link>
+        ether 3e:61:b0:69:4d:ad  txqueuelen 0  (Ethernet)
+        RX packets 18839  bytes 46492722 (44.3 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 12496  bytes 683954 (667.9 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 217  bytes 19504 (19.0 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 217  bytes 19504 (19.0 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+<\body>
+<\pre>
+[root@6af588313d39 html]# vi index.php
+[root@6af588313d39 html]# vi index.php
+[root@6af588313d39 html]# vi index.php
+[root@6af588313d39 html]# vi index.php
+[root@6af588313d39 html]# 
+
+
+
+
+
+OUTPUT
+
+ Welcome!!
+
+
+Hello Tushar
+This Is The Server Of Apache Docker-Centos7
+Sun Apr 26 18:50:29 UTC 2020
+eth0: flags=4163  mtu 1500
+        inet 10.88.0.32  netmask 255.255.0.0  broadcast 10.88.255.255
+        inet6 fe80::3c61:b0ff:fe69:4dad  prefixlen 64  scopeid 0x20
+        ether 3e:61:b0:69:4d:ad  txqueuelen 0  (Ethernet)
+        RX packets 18877  bytes 46497834 (44.3 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 12532  bytes 691167 (674.9 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 222  bytes 20962 (20.4 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 222  bytes 20962 (20.4 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+
